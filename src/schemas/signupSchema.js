@@ -3,7 +3,8 @@ import * as Yup from "yup";
 export const signupSchema = Yup.object({
     username: Yup.string()
     .required("กรุณากรอกชื่อผู้ใช้")
-    .min(3, "ชื่อผู้ใช้อย่างน้อย 3ตัวอักษร"),
+    // .min(3, "ชื่อผู้ใช้อย่างน้อย 3ตัวอักษร")
+    .matches(/^[a-zA-Z]{5,12}$/, "กรอกเป็นภาษาอังกฤษ 5–12 ตัว, ห้ามมี space)"),
 
     nickname: Yup.string()
     .required("กรุณากรอกชื่อเล่น")
@@ -21,6 +22,10 @@ export const signupSchema = Yup.object({
     age: Yup.number()
     .typeError("กรุณากรอกอายุเป็นตัวเลข")
     .min(14, "ต้องมีอายุมากกว่า 13 ปี"),
+
+    tel: Yup.string()
+    .required("กรุณากรอกเบอร์โทรศัพท์")
+    .matches(/^[0-9]{10}$/, "กรุณากรอกเบอร์โทรศัพท์ให้ครบ 10 หลัก"),
 
     terms: Yup.boolean()
     .oneOf([true], "ต้องยอมรับเงื่อนไขก่อน")
